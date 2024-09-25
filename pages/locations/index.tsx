@@ -26,14 +26,14 @@ type PropsType = {
 const Locations = (props: PropsType) => {
   const { locations } = props
 
-  const episodesList = locations.results.map((location) => (
+  const locationsList = locations.results.map((location) => (
     <div key={location.id}>{location.name}</div>
   ))
 
   return (
     <PageWrapper>
       <Header />
-      {episodesList}
+      {locationsList}
     </PageWrapper>
   )
 }
