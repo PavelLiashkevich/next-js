@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
 import styled from "styled-components";
+import { PropsWithChildren } from "react";
 import {HeadMeta} from '../HeadMeta/HeadMeta';
 
 type PropsType = {
