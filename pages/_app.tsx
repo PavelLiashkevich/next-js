@@ -1,3 +1,4 @@
+import '../styles/nprogress.css'
 import { ReactElement, ReactNode, useState } from 'react'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
@@ -6,6 +7,7 @@ import {
 	QueryClient,
 	QueryClientProvider,
 } from '@tanstack/react-query'
+import { useLoader } from '../assets/hooks/useLoader'
 
 export type NextPageWithLayout<P = {}> = NextPage<P> & {
 	getLayout?: (page: ReactElement) => ReactNode
@@ -26,6 +28,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 				},
 			})
 	)
+
+	useLoader()
 
 	const getLayout = Component.getLayout ?? (page => page)
 
