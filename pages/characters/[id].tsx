@@ -48,13 +48,18 @@ const Character = (props: PropsType) => {
   const router = useRouter()
 
   if (router.isFallback) return <h1>Loading...</h1>
-  
+
   const { id } = router.query
-  
+
   return (
     <PageWrapper>
-      <StyledIdText>ID: {id}</StyledIdText>
-      <CharacterCard key={character.id} character={character} />
+      <Container>
+        <StyledIdText>ID: {id}</StyledIdText>
+        <CharacterCard key={character.id} character={character} />
+        <StyledButton onClick={() => router.push("/characters")}>
+          Go to characters
+        </StyledButton>
+      </Container>
     </PageWrapper>
   )
 }
@@ -65,4 +70,26 @@ export default Character
 
 const StyledIdText = styled.div`
   font-size: 35px;
+`
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 20px;
+`
+
+const StyledButton = styled.button`
+  width: 330px;
+  height: 60px;
+  border-radius: 4px;
+  border: none;
+  background: #6767df;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  &:hover {
+    background: #2b2bc9;
+    color: white;
+    cursor: pointer;
+  }
 `
