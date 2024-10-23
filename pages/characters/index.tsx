@@ -28,7 +28,7 @@ const Characters = (props: PropsType) => {
   ))
 
   return (
-    <PageWrapper>
+    <PageWrapper title="Characters">
       {charactersList}
     </PageWrapper>
   )

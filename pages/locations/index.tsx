@@ -37,7 +37,7 @@ const Locations = () => {
   ))
 
   return (
-    <PageWrapper>
+    <PageWrapper title="Locations">
       {locationsList}
     </PageWrapper>
   )

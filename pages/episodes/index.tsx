@@ -32,7 +32,7 @@ const Episodes = (props: PropsType) => {
   ))
 
   return (
-    <PageWrapper>
+    <PageWrapper title="Episodes">
       {episodesList}
     </PageWrapper>
   )
