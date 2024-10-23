@@ -1,63 +1,68 @@
 import { API } from "../../assets/api/api"
-import {
-    CharacterType,
-} from "../../assets/api/rick-and-morty-api"
+import { CharacterType } from "../../assets/api/rick-and-morty-api"
 import { CharacterCard } from "../../components/Card/CharacterCard/CharacterCard"
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper"
 import { getLayout } from "../../components/Layout/BaseLayout/BaseLayout"
-import {GetStaticPaths, GetStaticProps} from "next";
-import {useRouter} from "next/router";
+import { GetStaticPaths, GetStaticProps } from "next"
+import { useRouter } from "next/router"
+import styled from "styled-components"
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const { results } = await API.rickAndMorty.getCharacters()
+  const { results } = await API.rickAndMorty.getCharacters()
 
-    const paths = results.map(character => ({
-        params: {id: String(character.id)},
-    }))
+  const paths = results.map((character) => ({
+    params: { id: String(character.id) },
+  }))
 
-    return {
-        paths,
-        fallback: 'blocking',
-    }
+  return {
+    paths,
+    fallback: "blocking",
+  }
 }
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { id } = params || {}
 
-    const { id } = params || {}
+  const character = await API.rickAndMorty.getCharacter(id as string)
 
-    const character = await API.rickAndMorty.getCharacter(id as string)
-
-    if (!character) {
-        return {
-            notFound: true,
-        }
-    }
-
+  if (!character) {
     return {
-        props: {
-            character,
-        },
+      notFound: true,
     }
+  }
+
+  return {
+    props: {
+      character,
+    },
+  }
 }
 
 type PropsType = {
-    character: CharacterType
+  character: CharacterType
 }
 
 const Character = (props: PropsType) => {
-    const { character } = props
+  const { character } = props
 
-    const router = useRouter()
+  const router = useRouter()
 
-    if(router.isFallback) return <h1>Loading...</h1>
-
-    return (
-        <PageWrapper>
-            <CharacterCard key={character.id} character={character} />
-        </PageWrapper>
-    )
+  if (router.isFallback) return <h1>Loading...</h1>
+  
+  const { id } = router.query
+  
+  return (
+    <PageWrapper>
+      <StyledIdText>ID: {id}</StyledIdText>
+      <CharacterCard key={character.id} character={character} />
+    </PageWrapper>
+  )
 }
 
 Character.getLayout = getLayout
 
 export default Character
+
+const StyledIdText = styled.div`
+  font-size: 35px;
+`
