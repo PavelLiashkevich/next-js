@@ -1,11 +1,11 @@
-import { API } from "../../assets/api/api"
-import { CharacterType } from "../../assets/api/rick-and-morty-api"
-import { CharacterCard } from "../../components/Card/CharacterCard/CharacterCard"
-import { PageWrapper } from "../../components/PageWrapper/PageWrapper"
-import { getLayout } from "../../components/Layout/BaseLayout/BaseLayout"
+import styled from "styled-components"
+import { API } from "assets/api/api"
+import { CharacterType } from "assets/api/rick-and-morty-api"
+import { CharacterCard } from "components/Card/CharacterCard/CharacterCard"
+import { PageWrapper } from "components/PageWrapper/PageWrapper"
+import { getLayout } from "components/Layout/BaseLayout/BaseLayout"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { useRouter } from "next/router"
-import styled from "styled-components"
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { results } = await API.rickAndMorty.getCharacters()
