@@ -7,7 +7,7 @@ const Custom404 = () => {
         <div className={styles.container}>
             <h1 className={styles.title}>404</h1>
             <p className={styles.description}>Oops!</p>
-            <Link href="/" className={styles.homeLink}>
+            <Link href="/public" className={styles.homeLink}>
                 Return to Homepage
             </Link>
         </div>
